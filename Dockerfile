@@ -13,5 +13,5 @@ RUN wget -O /tmp/key -q "https://yum.puppetlabs.com/RPM-GPG-KEY-puppet"\
 
 RUN mkdir /puppet
 WORKDIR /puppet
-COPY scripts /puppet/scripts
+COPY test-module.sh /puppet/scripts/test-module.sh
 ENTRYPOINT [ "/bin/bash", "-c", "scripts/test-module.sh" ]
