@@ -1,5 +1,9 @@
 #!/bin/bash
 
-# build image
-docker build -t docker-puppet-dev .\
-&& docker run docker-puppet-dev
+[[ "$#" -ne 2 ]] && echo "Usage: run.sh <modulepath> <manifest>" && exit 1
+
+MODULEPATH="$1"
+MANIFEST="$2"
+
+# run container
+docker run -v "$MANIFEST":/puppet/site.pp -v "$MODULEPATH":/puppet/modules/"$(basename "$MODULEPATH")" docker-puppet-dev

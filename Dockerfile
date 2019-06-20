@@ -12,11 +12,6 @@ RUN wget -O /tmp/key -q "https://yum.puppetlabs.com/RPM-GPG-KEY-puppet"\
       && zypper -n install puppet-agent
 
 RUN mkdir /puppet
-COPY hiera /puppet/hiera
-COPY hiera.yaml /puppet
-COPY modules /puppet/modules
-COPY site.pp /puppet
-COPY scripts /puppet/scripts
 WORKDIR /puppet
-
-CMD [ "scripts/test-module.sh" ]
+COPY scripts /puppet/scripts
+ENTRYPOINT [ "/bin/bash", "-c", "scripts/test-module.sh" ]
