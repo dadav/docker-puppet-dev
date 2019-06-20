@@ -1,11 +1,9 @@
 FROM opensuse/leap:latest
 
-
 # INSTALL wget
 RUN zypper -n ref\
-      && zypper -n install wget
-
-RUN wget -O /tmp/key -q "https://yum.puppetlabs.com/RPM-GPG-KEY-puppet"\
+      && zypper -n install wget\
+      && wget -O /tmp/key -q "https://yum.puppetlabs.com/RPM-GPG-KEY-puppet"\
       && rpm --import /tmp/key\
       && zypper ar "https://yum.puppetlabs.com/puppet6/sles/15/x86_64/" puppet\
       && zypper -n ref \
